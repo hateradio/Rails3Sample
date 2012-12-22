@@ -1,0 +1,24 @@
+*         text=auto
+
+*.rb      text
+*.ru      text
+*.erb     text
+*.html    text diff=html
+*.xml     text
+*.css     text
+*.scss    text
+*.less    text
+*.js      text
+*.json    text
+*.coffee  text
+*.yml     text
+*.sql     text
+*.rspec   text
+
+*.png     binary
+*.jpeg    binary
+*.jpg     binary
+*.gif     binary
+*.ico     binary
+
+*.gz      binary
