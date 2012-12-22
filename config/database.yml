@@ -12,10 +12,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: sample_development
+  database: aco_dh_development
   pool: 5
-  username: root
-  password:
+  username: aco_dh
+  password: VtvWh8UH4GwPvZ55
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -25,10 +25,10 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: sample_test
+  database: aco_dh_test
   pool: 5
-  username: root
-  password:
+  username: aco_dh
+  password: VtvWh8UH4GwPvZ55
   host: localhost
 
 production:
@@ -37,6 +37,6 @@ production:
   reconnect: false
   database: sample_production
   pool: 5
-  username: root
+  username: 
   password:
   host: localhost
