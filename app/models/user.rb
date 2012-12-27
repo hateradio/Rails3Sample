@@ -1,0 +1,34 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
+#
+
+class User < ActiveRecord::Base
+  has_secure_password
+  attr_accessible :email, :name, :password, :password_confirmation
+
+  before_save do |user|
+    user.email.downcase!
+    e = user.email.split('@')
+    if e.length == 2 and /(?:g(?:oogle)?mail\.)/i =~ e[1]
+      s = e[0].gsub('.', '')
+      user.email = s + e[1]
+    elsif e.length != 2
+      user.email = nil
+    end
+  end
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false }
+  validates :password, presence: true, length: { minimum: 6 }
+  validates :password_confirmation, presence: true
+end
