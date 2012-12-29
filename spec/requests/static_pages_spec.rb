@@ -1,5 +1,10 @@
 require 'spec_helper'
 
+def heading_titles(heading, title=nil)
+  let(:heading) { heading }
+  let(:page_title) { title || heading }
+end
+
 describe "Static pages" do
 
   subject { page }
@@ -11,8 +16,9 @@ describe "Static pages" do
 
   describe "Home page" do
     before { visit root_path }
-    let(:heading)    { 'Sample App' }
-    let(:page_title) { '' }
+    #let(:heading)    { 'Sample App' }
+    #let(:page_title) { '' }
+    heading_titles 'Sample App', ''
 
     it_should_behave_like "all static pages"
     it { should_not have_selector 'title', text: '| Home' }
@@ -20,41 +26,34 @@ describe "Static pages" do
 
   describe "Help page" do
     before { visit help_path }
-    let(:heading)    { 'Help' }
-    let(:page_title) { 'Help' }
+    heading_titles 'Help'
 
     it_should_behave_like "all static pages"
   end
 
   describe "About page" do
     before { visit about_path }
-    let(:heading)    { 'About' }
-    let(:page_title) { 'About Us' }
+    heading_titles 'About', 'About Us'
 
     it_should_behave_like "all static pages"
   end
 
   describe "Contact page" do
     before { visit contact_path }
-    let(:heading)    { 'Contact' }
-    let(:page_title) { 'Contact' }
+    heading_titles 'Contact'
 
     it_should_behave_like "all static pages"
   end
 
   it "should have the right links on the layout" do
     visit root_path
-    click_link "About"
-    page.should have_selector 'title', text: full_title('About Us')
-    click_link "Help"
-    page.should have_selector 'title', text: full_title('Help')
-    click_link "Contact"
-    page.should have_selector 'title', text: full_title('Contact')
-    click_link "Home"
-    page.should have_selector 'title', text: full_title('')
-    click_link "Sign up now!"
-    page.should have_selector 'title', text: full_title('Sign up')
-    click_link "sample app"
-    page.should have_selector 'title', text: full_title('')
+    #click_link "About"
+    #page.should have_selector 'title', text: full_title('About Us')
+    click_get_page 'About', 'About Us'
+    click_get_page 'Help'
+    click_get_page 'Contact'
+    click_get_page 'Home', ''
+    click_get_page 'Sign up now!', 'Sign up'
+    click_get_page 'sample app', ''
   end
 end

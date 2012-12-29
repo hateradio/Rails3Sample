@@ -11,12 +11,21 @@ end
 
 group :test do
   gem 'capybara', '1.1.2'
-  gem 'rb-fchange', '0.0.5'
-  gem 'rb-notifu', '0.0.4'
-  gem 'win32console', '1.3.2'
-  gem 'wdm', '~> 0.0.3'
-  gem 'guard-spork', '1.2.0'
+
+  if RUBY_PLATFORM =~ /w33/i
+    if RUBY_VERSION > '1.9.2' # hopefully no Ruby 1.9.10 will arrive
+      gem 'wdm', '~> 0.0.3'
+    else
+      gem 'rb-fchange', '0.0.5'
+    end
+    gem 'win32console', '1.3.2'
+    #gem 'rb-notifu', '0.0.4'
+  elsif RUBY_PLATFORM =~ /darwin/i
+    gem 'rb-fsevent', :require => false
+  end
+
   gem 'spork', '0.9.2'
+  gem 'guard-spork', '1.2.0'
   gem 'factory_girl_rails', '4.1.0'
   gem 'cucumber-rails', '1.2.1', :require => false
   gem 'database_cleaner', '0.7.0'

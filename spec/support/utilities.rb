@@ -20,3 +20,10 @@ RSpec::Matchers.define :have_error_message do |message|
     page.should have_selector('div.alert.alert-error', text: message)
   end
 end
+
+RSpec::Matchers.define :click_get_page do |link, title|
+  match do |page|
+    click_link link
+    page.should have_selector 'title', text: full_title(title || link)
+  end
+end
