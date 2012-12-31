@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
     user = find_user
     if user
       sign_in user
-      redirect_to user
+      redirect_back_or user
     else
       flash.now[:error] = 'Invalid email and/or password'
-      render :new
+      render :'sessions/new'
     end
   end
 
