@@ -1,8 +1,10 @@
 class SessionsController < ApplicationController
   def new
+    redirect_to root_path if signed_in? and Rails.env.production?
   end
 
   def create
+    redirect_to root_path if signed_in? and Rails.env.production?
     user = find_user
     if user
       sign_in user
